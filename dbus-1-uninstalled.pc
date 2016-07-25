@@ -1,5 +1,5 @@
-abs_top_builddir=/home/fma1/src/dbus
-abs_top_srcdir=/home/fma1/src/dbus
+abs_top_builddir=/home/fma1/src/git/dbus-fork
+abs_top_srcdir=/home/fma1/src/git/dbus-fork
 prefix=
 exec_prefix=
 bindir=${exec_prefix}/bin

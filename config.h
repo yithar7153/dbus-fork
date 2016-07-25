@@ -92,10 +92,10 @@
 #define DBUS_SYSTEM_SOCKET "/run/dbus/system_bus_socket"
 
 /* Full path to the daemon in the builddir */
-#define DBUS_TEST_EXEC "/home/fma1/src/dbus/test"
+#define DBUS_TEST_EXEC "/home/fma1/src/git/dbus-fork/test"
 
 /* Full path to the launch helper test program in the builddir */
-#define DBUS_TEST_LAUNCH_HELPER_BINARY "/home/fma1/src/dbus/bus/dbus-daemon-launch-helper-test"
+#define DBUS_TEST_LAUNCH_HELPER_BINARY "/home/fma1/src/git/dbus-fork/bus/dbus-daemon-launch-helper-test"
 
 /* Where to put test sockets */
 #define DBUS_TEST_SOCKET_DIR "/tmp"

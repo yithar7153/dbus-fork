@@ -234,7 +234,7 @@ am__DIST_COMMON = $(srcdir)/Doxyfile.in $(srcdir)/Makefile.in \
 	$(top_srcdir)/bus/systemd-user/dbus.service.in \
 	$(top_srcdir)/bus/systemd-user/dbus.socket.in AUTHORS COPYING \
 	ChangeLog INSTALL NEWS README build-aux/compile \
-	build-aux/config.guess build-aux/config.sub \
+	build-aux/config.guess build-aux/config.sub build-aux/depcomp \
 	build-aux/install-sh build-aux/ltmain.sh build-aux/missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
@@ -278,16 +278,16 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/fma1/src/dbus/build-aux/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/fma1/src/git/dbus-fork/build-aux/missing aclocal-1.15
 ADT_LIBS = 
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 0
 APPARMOR_CFLAGS = 
 APPARMOR_LIBS = 
 AR = ar
-AUTOCONF = ${SHELL} /home/fma1/src/dbus/build-aux/missing autoconf
-AUTOHEADER = ${SHELL} /home/fma1/src/dbus/build-aux/missing autoheader
-AUTOMAKE = ${SHELL} /home/fma1/src/dbus/build-aux/missing automake-1.15
+AUTOCONF = ${SHELL} /home/fma1/src/git/dbus-fork/build-aux/missing autoconf
+AUTOHEADER = ${SHELL} /home/fma1/src/git/dbus-fork/build-aux/missing autoheader
+AUTOMAKE = ${SHELL} /home/fma1/src/git/dbus-fork/build-aux/missing automake-1.15
 AWK = gawk
 BUILD_FILEVERSION = 
 BUILD_TIMESTAMP = 
@@ -326,8 +326,8 @@ DBUS_STATIC_BUILD_CPPFLAGS =
 DBUS_SYSTEM_BUS_DEFAULT_ADDRESS = unix:path=/run/dbus/system_bus_socket
 DBUS_SYSTEM_PID_FILE = /run/dbus/pid
 DBUS_SYSTEM_SOCKET = /run/dbus/system_bus_socket
-DBUS_TEST_DATA = /home/fma1/src/dbus/test/data
-DBUS_TEST_EXEC = /home/fma1/src/dbus/test
+DBUS_TEST_DATA = /home/fma1/src/git/dbus-fork/test/data
+DBUS_TEST_EXEC = /home/fma1/src/git/dbus-fork/test
 DBUS_TEST_USER = nobody
 DBUS_UINT64_CONSTANT = (val##UL)
 DBUS_USER = dbus
@@ -380,7 +380,7 @@ LT_CURRENT = 18
 LT_REVISION = 1
 LT_SYS_LIBRARY_PATH = 
 MAINT = 
-MAKEINFO = ${SHELL} /home/fma1/src/dbus/build-aux/missing makeinfo
+MAKEINFO = ${SHELL} /home/fma1/src/git/dbus-fork/build-aux/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
 NETWORK_libs = 
@@ -417,7 +417,7 @@ SYSCONFDIR_FROM_PKGDATADIR = /etc
 SYSTEMCTL = /usr/bin/systemctl
 SYSTEMD_CFLAGS = 
 SYSTEMD_LIBS = 
-TEST_LAUNCH_HELPER_BINARY = /home/fma1/src/dbus/bus/dbus-daemon-launch-helper-test
+TEST_LAUNCH_HELPER_BINARY = /home/fma1/src/git/dbus-fork/bus/dbus-daemon-launch-helper-test
 TEST_LISTEN = unix:tmpdir=/tmp
 TEST_SOCKET_DIR = /tmp
 THREAD_LIBS = -lpthread  
@@ -435,10 +435,10 @@ X_EXTRA_LIBS =
 X_LIBS = 
 X_PRE_LIBS =  -lSM -lICE
 YELP_BUILD = no
-abs_builddir = /home/fma1/src/dbus
-abs_srcdir = /home/fma1/src/dbus
-abs_top_builddir = /home/fma1/src/dbus
-abs_top_srcdir = /home/fma1/src/dbus
+abs_builddir = /home/fma1/src/git/dbus-fork
+abs_srcdir = /home/fma1/src/git/dbus-fork
+abs_top_builddir = /home/fma1/src/git/dbus-fork
+abs_top_srcdir = /home/fma1/src/git/dbus-fork
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -469,7 +469,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/fma1/src/dbus/build-aux/install-sh
+install_sh = ${SHELL} /home/fma1/src/git/dbus-fork/build-aux/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -1051,18 +1051,18 @@ update-authors:
 	git shortlog -s -e | cut -c 8- | sort > AUTHORS
 
 lcov-reset:
-	lcov --directory /home/fma1/src/dbus --zerocounters
+	lcov --directory /home/fma1/src/git/dbus-fork --zerocounters
 
 lcov-report:
-	lcov --directory /home/fma1/src/dbus --capture \
-		--output-file /home/fma1/src/dbus/lcov.info
-	$(mkdir_p) /home/fma1/src/dbus/lcov.html
-	git_commit=`GIT_DIR=/home/fma1/src/dbus/.git git log -1 --pretty=format:%h 2>/dev/null`;\
+	lcov --directory /home/fma1/src/git/dbus-fork --capture \
+		--output-file /home/fma1/src/git/dbus-fork/lcov.info
+	$(mkdir_p) /home/fma1/src/git/dbus-fork/lcov.html
+	git_commit=`GIT_DIR=/home/fma1/src/git/dbus-fork/.git git log -1 --pretty=format:%h 2>/dev/null`;\
 	genhtml --title "dbus 1.11.3 $$git_commit" \
-		--output-directory /home/fma1/src/dbus/lcov.html lcov.info
+		--output-directory /home/fma1/src/git/dbus-fork/lcov.html lcov.info
 	@echo
 	@echo 'lcov report can be found in:'
-	@echo 'file:///home/fma1/src/dbus/lcov.html/index.html'
+	@echo 'file:///home/fma1/src/git/dbus-fork/lcov.html/index.html'
 	@echo
 
 lcov-check:
