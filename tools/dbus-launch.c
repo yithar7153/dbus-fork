@@ -995,79 +995,8 @@ main (int argc, char **argv)
 	       "Cannot continue.\n");
       exit (1);
 #else /* DBUS_BUILD_X11 */
-#ifndef DBUS_ENABLE_X11_AUTOLAUNCH
       fprintf (stderr, "X11 autolaunch support disabled at compile time.\n");
       exit (1);
-#else /* DBUS_ENABLE_X11_AUTOLAUNCH */
-      char *address;
-      pid_t pid;
-      long wid;
-      DBusError error = DBUS_ERROR_INIT;
-      
-      if (get_machine_uuid () == NULL)
-        {
-          fprintf (stderr, "Machine UUID not provided as arg to --autolaunch\n");
-          exit (1);
-        }
-
-      if (!_dbus_string_init (&user_bus))
-        tool_oom ("initializing");
-
-      /* If we have an XDG_RUNTIME_DIR and it contains a suitable socket,
-       * dbus-launch --autolaunch can use it, since --autolaunch implies
-       * "I'm OK with getting a bus that is already active".
-       *
-       * (However, plain dbus-launch without --autolaunch must not do so,
-       * because that would break lots of regression tests, which often
-       * use dbus-launch instead of the more appropriate dbus-run-session.)
-       *
-       * At this stage, we just save the user bus's address; later on, the
-       * "babysitter" process will be available to advertise the user-bus
-       * on the X11 display and in ~/.dbus/session-bus, for full
-       * backwards compatibility.
-       */
-      if (!_dbus_lookup_user_bus (&user_bus_supported, &user_bus, &error))
-        {
-          fprintf (stderr, "%s\n", error.message);
-          exit (1);
-        }
-      else if (user_bus_supported)
-        {
-          verbose ("=== Using existing user bus \"%s\"\n",
-                   _dbus_string_get_const_data (&user_bus));
-        }
-      else
-        {
-          _dbus_string_free (&user_bus);
-        }
-
-      verbose ("Autolaunch enabled (using X11).\n");
-      if (!exit_with_x11)
-	{
-          verbose ("--exit-with-x11 automatically enabled\n");
-          exit_with_x11 = TRUE;
-	}
-
-      if (!x11_init ())
-	{
-	  fprintf (stderr, "Autolaunch error: X11 initialization failed.\n");
-	  exit (1);
-	}
-
-      if (!x11_get_address (&address, &pid, &wid))
-	{
-	  fprintf (stderr, "Autolaunch error: X11 communication error.\n");
-	  exit (1);
-	}
-
-      if (address != NULL)
-	{
-	  verbose ("dbus-daemon is already running. Returning existing parameters.\n");
-	  pass_info (runprog, address, pid, wid, c_shell_syntax,
-			   bourne_shell_syntax, binary_syntax, argc, argv, remaining_args);
-	  exit (0);
-	}
-#endif /* DBUS_ENABLE_X11_AUTOLAUNCH */
 #endif /* DBUS_BUILD_X11 */
     }
   else if (exit_with_x11)
